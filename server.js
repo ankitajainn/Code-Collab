@@ -15,7 +15,8 @@ app.use((req, res, next) => {
 
 const userSocketMap = {};
 function getAllConnectedClients(roomId) {
-    // Map datatype h js k andr 
+    // Map datatype h js k andr usko RRy bnane kr liye from array use krenge
+     
     return Array.from(io.sockets.adapter.rooms.get(roomId) || []).map(
         (socketId) => {
             return {
