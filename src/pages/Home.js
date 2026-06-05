@@ -32,9 +32,9 @@ function Home() {
         navigate(`/editor/${roomId}`,{
             state:{
                 username,
-            }
-        })
-    }
+            },
+        });
+    }; 
 
 
         const handleInputEnter=(e)=>{
