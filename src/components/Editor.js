@@ -29,14 +29,24 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
                 const code = instance.getValue();
                 onCodeChange(code);
                 if (origin !== 'setValue') {
+                    console.log("working ",code);
                     socketRef.current.emit(ACTIONS.CODE_CHANGE, {
                         roomId,
                         code,
                     });
                 }
+                
             });
+
+            socketRef.current.on(ACTIONS.CODE_CHANGE,({code})=>{
+                if(code !== null){
+                    editorRef.current.setValue(code);
+                }
+            })
         }
         init();
+
+
     }, []);
 
    
@@ -50,14 +60,15 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
         }
     };
 
+    
     socketRef.current.on(ACTIONS.CODE_CHANGE, handleCodeChange);
-
+ 
     return () => {
         if (socketRef.current) {
             socketRef.current.off(ACTIONS.CODE_CHANGE, handleCodeChange);
         }
     };
-}, [socketRef]);  
+}, [socketRef.current ]);  
 
 
     return <textarea id="realtimeEditor"></textarea>;
