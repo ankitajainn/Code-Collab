@@ -73,6 +73,7 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
                 // 3. Restore cursor position and scroll position
                 editor.setCursor(cursor);
                 editor.scrollTo(scrollInfo.left, scrollInfo.top);
+            }
         }
     };
 
