@@ -8,6 +8,30 @@ const ACTIONS = require('./src/Actions');
 const server = http.createServer(app);
 const io = new Server(server);
 
+
+//addin these for deployment safety
+const allowedOrigins = [
+    'http://localhost:3000',
+    /\.vercel\.app$/ // Matches any Vercel deployment URL
+];
+
+// Configure Express CORS
+app.use(cors({
+    origin: allowedOrigins,
+    methods: ['GET', 'POST'],
+    credentials: true,
+}));
+
+// Configure Socket.IO CORS
+const io = new Server(server, {
+    cors: {
+        origin: allowedOrigins,
+        methods: ['GET', 'POST'],
+        credentials: true,
+    },
+});
+//till here
+
 app.use(express.static('build'));
 app.use((req, res, next) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
