@@ -56,7 +56,23 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
 
     const handleCodeChange = ({ code }) => {
         if (code !== null) {
-            editorRef.current.setValue(code);
+            // editorRef.current.setValue(code);
+
+            const editor = editorRef.current;
+            const currentCode = editor.getValue();
+
+            // Only update if incoming code is different from local content
+            if (currentCode !== code) {
+                // 1. Save current cursor position and scroll state
+                const cursor = editor.getCursor();
+                const scrollInfo = editor.getScrollInfo();
+
+                // 2. Update editor value
+                editor.setValue(code);
+
+                // 3. Restore cursor position and scroll position
+                editor.setCursor(cursor);
+                editor.scrollTo(scrollInfo.left, scrollInfo.top);
         }
     };
 
