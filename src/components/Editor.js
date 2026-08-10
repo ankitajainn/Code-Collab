@@ -50,16 +50,14 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
                 const currentCode = editor.getValue();
 
                 if (currentCode !== code) {
-                    // Save cursor position and scroll coordinates
-                    const cursor = editor.getCursor();
-                    const scrollInfo = editor.getScrollInfo();
+                    
 
                     // Apply updated code
                     editor.setValue(code);
-
-                    // Restore position
-                    editor.setCursor(cursor);
-                    editor.scrollTo(scrollInfo.left, scrollInfo.top);
+                    // Move cursor to the very end of the document for incoming changes
+                const lastLine = editor.lastLine();
+                const lastChar = editor.getLine(lastLine).length;
+                editor.setCursor({ line: lastLine, ch: lastChar });
                 }
             }
         };
