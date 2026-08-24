@@ -1,72 +1,119 @@
-# Getting Started with Create React App
+# Code-Collab
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A real-time collaborative code editor that lets multiple people write and edit code together in the same room, live — built with React, CodeMirror, and Socket.IO.
 
-This project helps to build the concept of socket.io
+Live Link : https://code-collab-frontend-git-main-ankitajainns-projects.vercel.app/
+
+## Features
+
+- **Real-time collaborative editing** — every keystroke is synced instantly across all connected clients using Socket.IO.
+- **Room-based sessions** — create or join a coding room with a unique room ID (powered by `uuid`), and share it with collaborators.
+- **Live user presence** — see who else is currently in the room, with avatars via `react-avatar`.
+- **Syntax-highlighted editor** — powered by CodeMirror for a fast, familiar code-editing experience.
+- **Instant notifications** — join/leave and connection events surfaced with `react-hot-toast`.
+- **Client + server in one app** — an Express server handles Socket.IO connections and can also serve the production React build.
+
+## Tech Stack
+
+**Frontend**
+- React 18 (bootstrapped with Create React App)
+- React Router DOM
+- CodeMirror
+- Socket.IO Client
+- React Avatar
+- React Hot Toast
+
+**Backend**
+- Node.js + Express
+- Socket.IO
+- CORS
+
+## Project Structure
+
+```
+Code-Collab/
+├── public/          # Static assets and HTML template
+├── src/             # React application source (components, pages, socket logic)
+├── server.js         # Express + Socket.IO server
+├── vercel.json        # Deployment configuration
+├── package.json
+└── .env               # Environment variables (not committed — see below)
+```
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) (v16+ recommended)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/ankitajainn/Code-Collab.git
+   cd Code-Collab
+   ```
+
+2. Install dependencies
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables
+
+   Create a `.env` file in the project root and add any required values (e.g. server port, client URL):
+   ```
+   PORT=5000
+   ```
+
+### Running Locally
+
+Run the React frontend in development mode:
+```bash
+npm run start:front
+```
+This starts the client at `http://localhost:3000`.
+
+Run the backend server (with auto-restart on changes):
+```bash
+npm run server:dev
+```
+
+### Production Build
+
+Build the React app and start the Express server to serve it:
+```bash
+npm start
+```
+
+This runs `npm run build` followed by `npm run server:prod`, so the Express server serves both the Socket.IO connections and the built frontend from a single process.
 
 ## Available Scripts
 
-In the project directory, you can run:
+| Script | Description |
+| --- | --- |
+| `npm run start:front` | Runs the React app in development mode |
+| `npm run server:dev` | Runs the Express server with `nodemon` for auto-reload |
+| `npm run server:prod` | Runs the Express server in production mode |
+| `npm run build` | Builds the React app for production |
+| `npm start` | Builds the app and starts the production server |
+| `npm test` | Launches the test runner |
 
-### `npm start`
+## Deployment
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The project includes a `vercel.json` configuration for deployment on [Vercel](https://vercel.com/).
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Contributing
 
-### `npm test`
+Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'Add some feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a pull request
 
-### `npm run build`
+## License
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project currently has no license specified. Consider adding one (e.g. MIT) if you plan to open it up for wider use.
